@@ -16,13 +16,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.loginPage;
 
@@ -36,19 +33,17 @@ public class baseTest {
 	public static  ExtentReports extent ;
 	public static ExtentTest test;
 	
-	
 	@BeforeTest
 	public void before() {
 		spark = new ExtentSparkReporter("ExtentSpark.html");
 		extent = new ExtentReports();
 		extent.attachReporter(spark);
-		
 	}
 		
-		@AfterTest
-		public void after() {
-			extent.flush();
-		}
+	@AfterTest
+	public void after() {
+		extent.flush();
+	}
 		
 	 @BeforeMethod
 	 public void beforeMethod(Method method) {
@@ -79,12 +74,10 @@ public class baseTest {
 		}	
 }
 	
-	
 	@AfterClass
 	public void close() {
 		driver.close();
 	}
-
 	public void verifyCurrentUrl(String url) {
 		if(!url.equals(driver.getCurrentUrl())){
 			test.log(Status.FAIL,"Current URL:"
@@ -95,10 +88,7 @@ public class baseTest {
 			test.log(Status.PASS,"Current URL:"
 					+ driver.getCurrentUrl()+ " Expected URL: " + url);
 			}
-		
 	}
-	
-	//Reusable method
 	public void waitAndClick(By element){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
