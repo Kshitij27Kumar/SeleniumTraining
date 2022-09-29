@@ -2,15 +2,10 @@ package testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
-//import org.testng.annotations.DataProvider;
-
-
-
 import pages.loginPage;
 
 public class LoginTestCase extends baseTest{
 	loginPage obj;
-	
 	@BeforeTest
 	public void loginTest() throws InterruptedException {
 		obj=new loginPage(driver);
@@ -26,6 +21,7 @@ public class LoginTestCase extends baseTest{
 	}
 }
 	
+//The purpose of this file is to test login with wrong credentials, not in use anymore
 //	@DataProvider
 //	public Object[][] testData() {
 //		return new Object[][] { 
