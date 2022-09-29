@@ -7,41 +7,37 @@ import com.aventstack.extentreports.Status;
 import pages.LocationPage;
 import pages.dashboardPage;
 
-
 public class locationTestCase extends baseTest {
-	//loginPage objLogin;
-	LocationPage objLocation;
-	dashboardPage objDashboard;
+	LocationPage locationObj;
+	dashboardPage dashboardObj;
 	@Test(dataProvider="testData")
-  public void location(String office, String City, String Phone, String Zip, String Country,String Province) throws InterruptedException {
-	    test.log(Status.INFO, "Create Location with "+ City+" , "+Country+" ");
-		objDashboard=new dashboardPage(driver);
-		objDashboard.searchAndClick();
-		objLocation=new LocationPage(driver);
+  public void location(String officeName, String cityName, String phoneNum, String zipCode, String Country,String State) throws InterruptedException {
+	    test.log(Status.INFO, "Created location with "+ cityName+" , "+Country+" ");
+		dashboardObj=new dashboardPage(driver);
+		dashboardObj.searchAndClick();
+		locationObj=new LocationPage(driver);
 		try {
 		super.verifyCurrentUrl(prop.getProperty("LocationUrl"));
-		objLocation.Details(office,City,Phone,Zip,Country,Province);
-		test.log(Status.PASS , "New Office: "+ office+ "added successfully. ");
+		locationObj.Details(officeName,cityName,phoneNum,zipCode,Country,State);
+		test.log(Status.PASS , "New Office: "+ officeName+ "added successfully. ");
 		}catch(Exception e) {
 			test.log(Status.FAIL , "Adding new office FAILED with error : " + e);
-            Assert.fail("Adding New office failed");
+            Assert.fail("New office not added");
 		}
 		
 		try {
-		objLocation.verifyLocationTest(office, City, Phone, Zip, Country);
-		test.log(Status.PASS , "Location successfully Verified");
+		locationObj.verifyLocationTest(officeName, cityName, phoneNum, zipCode, Country);
+		test.log(Status.PASS , "Location successfully verified");
 		}catch(Exception e) {
-			test.log(Status.FAIL , "Failed to verify location");
-			Assert.fail("Could not add location");
+			test.log(Status.FAIL , "Location verification failed");
+			Assert.fail("Location not found");
 		}
 		
 	}	
 	@DataProvider
 	public Object[][] testData() {
 		return new Object[][] { 
-			    { "New York Dunder mifflin","New York","8464876121","100001","United States","Alaska"},
+			    { "New York4227","New York","8464876121","100001","United States","New Jersey"}
 				 };
 	}
-  
-  
 }
